@@ -1,10 +1,9 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
-  display: grid;
-  justify-items: center;
+  background-size: 100% 100%;
+  background-image: url("./assets/background.png");
+  height: 100vh;
+  display: flex;
 }
 
 .logo {
@@ -43,7 +42,102 @@
   color: #888;
 }
 
-.coordinateInput {
+.rightPanel {
   display: flex;
+  flex-direction: column;
+}
+
+.rightPanel div:last-of-type {
+  flex-grow: 1;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.signal {
+  width: 10vw;
+  height: 10vw;
+}
+
+.signal svg {
+  width: inherit;
+  height: inherit;
+}
+
+.damageState {
+  width: 10vw;
+  height: 20vw;
+}
+
+.damageState svg {
+  width: inherit;
+  height: inherit;
+}
+
+.leftPanel {
+  margin-left: auto;
+  display: flex;
+}
+.fuelState {
+  margin-bottom: 30vh;
+  margin-top: auto;
+  width: 15vw;
+  height: 20vw;
+}
+.fuelState svg {
+  width: inherit;
+  height: inherit;
+}
+p {
+  user-select: none;
+}
+button {
+  user-select: none;
+}
+svg text {
+  pointer-events: none;
+}
+.infoBox {
+  border: 3px #00DDFF solid;
+  border-bottom: none;
+  background-color: rgba(40, 19, 203, .25);
+  width: 30%;
+  box-sizing: border-box;
+  color: #00DDFF;
+  font-size: 1.75vw;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
 }
+.infoBox p {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+.infoBox p:first-child {
+  margin-block-start: 1.5vh;
+}
+.center {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.center > div {
+  margin-top: auto;
+  display: flex;
+  height: 20vh;
+  justify-content: space-evenly;
+}
+
+.center button {
+  width: 30%;
+  font-size: 3vw;
+  font-weight: bold;
+  color: #2FFF00;
+  background-color: rgba(47, 255, 0, .25);
+  border: 3px #2FFF00 solid;
+  border-bottom: none;
+  border-radius: 5vw;
+}
+ 

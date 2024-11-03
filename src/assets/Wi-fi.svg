@@ -1,0 +1,10 @@
+<svg version="1.1"
+     baseProfile="full"
+     width="192" height="192" viewBox="0 0 192 192"
+     xmlns="http://www.w3.org/2000/svg">
+
+  <circle cx="0" cy="0" r="27.4" fill="#2FFF00"/>
+  <circle cx="0" cy="0" r="68.5" stroke="#2FFF00" fill-opacity = "0" stroke-width="27.4"/>
+  <circle cx="0" cy="0" r="123.3" stroke="#2FFF00" fill-opacity = "0" stroke-width="27.4"/>
+  <circle cx="0" cy="0" r="178" stroke="#2FFF00" fill-opacity = "0" stroke-width="27.4"/>
+</svg>
