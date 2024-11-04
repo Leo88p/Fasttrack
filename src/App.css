@@ -95,7 +95,7 @@ button {
   user-select: none;
 }
 svg text {
-  pointer-events: none;
+  user-select: none;
 }
 .infoBox {
   border: 3px #00DDFF solid;
@@ -123,7 +123,21 @@ svg text {
   display: flex;
   flex-direction: column;
 }
-.center > div {
+
+.map {
+  margin-top: 10vh;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.map > div {
+  width: 80%;
+  height: 100%;
+  background-color: rgba(40, 19, 203, .25);
+  border: 3px #00DDFF solid;
+}
+.center > div:last-of-type {
   margin-top: auto;
   display: flex;
   height: 20vh;
@@ -138,6 +152,6 @@ svg text {
   background-color: rgba(47, 255, 0, .25);
   border: 3px #2FFF00 solid;
   border-bottom: none;
-  border-radius: 5vw;
+  border-radius: 25% / 50%;
 }
  

@@ -41,6 +41,9 @@ function App() {
           </div>
       </div>
       <div className='center'>
+        <div className='map'>
+          <div/>
+        </div>
         <div>
           <InfoBox text='Мои координаты:' x = '0' y = '0'/>
           <button>Лететь!</button>
