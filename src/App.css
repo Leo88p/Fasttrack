@@ -104,7 +104,7 @@ svg text {
   width: 30%;
   box-sizing: border-box;
   color: #00DDFF;
-  font-size: 1.75vw;
+  font-size: 3.25vh;
   font-weight: bold;
   display: flex;
   flex-direction: column;
@@ -137,6 +137,12 @@ svg text {
   background-color: rgba(40, 19, 203, .25);
   border: 0.25vw #00DDFF solid;
 }
+
+.map > div:hover {
+  border-width: 0.5vw !important;
+  background-color: rgba(40, 19, 203, .5) !important;
+  cursor: crosshair;
+}
 .center > div:last-of-type {
   margin-top: auto;
   display: flex;
@@ -146,7 +152,7 @@ svg text {
 
 .center button {
   width: 30%;
-  font-size: 3vw;
+  font-size: 6vh;
   font-weight: bold;
   color: #2FFF00;
   background-color: rgba(47, 255, 0, .25);
@@ -154,4 +160,12 @@ svg text {
   border-bottom: none;
   border-radius: 25% / 50%;
 }
- 
+
+.selectedMap {
+  border-width: 0.5vw !important;
+  background-color: rgba(40, 19, 203, .5) !important;
+}
+
+.draggingMap {
+  cursor: grab !important;
+}

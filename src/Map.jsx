@@ -9,6 +9,12 @@ function Map() {
         width:0,
         height:0
     })
+    const [clicked, setClicked] = useState(false)
+    const [moving, setMoving] = useState(false)
+    const [cursor, setCursor] = useState({
+        x: 0,
+        y: 0
+    })
 
     function resize () {
         if(ref.current) {
@@ -17,15 +23,15 @@ function Map() {
         }
     }
 
-    function eventKey(event) {
+    function eventKeyDown(event) {
         const step=10
         switch (event.code) {
             case 'ArrowUp': {
-                console.log(offset.height - 1)
                 setOffset({
                     width: offset.width,
                     height:offset.height-step
                 })
+                ref.current.classList.add('selectedMap')
                 break;
             }
             case 'ArrowDown': {
@@ -33,6 +39,7 @@ function Map() {
                     width: offset.width,
                     height:offset.height+step
                 })
+                ref.current.classList.add('selectedMap')
                 break;
             }
             case 'ArrowLeft': {
@@ -40,6 +47,7 @@ function Map() {
                     width: offset.width-step,
                     height:offset.height
                 })
+                ref.current.classList.add('selectedMap')
                 break;
             }
             case 'ArrowRight': {
@@ -47,23 +55,72 @@ function Map() {
                     width: offset.width+step,
                     height:offset.height
                 })
+                ref.current.classList.add('selectedMap')
                 break;
             }
           }
     }
+
+    function eventKeyUp(event) {
+        ref.current.classList.remove('selectedMap')
+    }
+
+    function eventPointerDown(event) {
+        ref.current.classList.add('selectedMap')
+        setClicked(true)
+        setCursor({
+            x: event.clientX,
+            y: event.clientY
+        })
+    }
+    function eventPointerMove(event) {
+        if (clicked) {
+            if (!moving) {
+                ref.current.classList.add('draggingMap')
+            }
+            setMoving(true)
+            setOffset({
+                width: offset.width-cursor.x+event.clientX,
+                height: offset.height-cursor.y+event.clientY
+            })
+            setCursor({
+                x: event.clientX,
+                y: event.clientY
+            })
+        }
+    }
+    function eventPointerUp(event) {
+        ref.current.classList.remove('selectedMap')
+        ref.current.classList.remove('draggingMap')
+        setClicked(false)
+        setMoving(false)
+    }
+
     useEffect(() => {
         resize()
-    })
+    }, [width, height])
+    
     useEffect(() => {
         addEventListener('resize', resize)
-        addEventListener('keydown', eventKey)
-
+        addEventListener('keydown', eventKeyDown)
+        addEventListener('keyup', eventKeyUp)
+        if (ref.current) {
+            ref.current.addEventListener('pointerdown', eventPointerDown)
+            ref.current.addEventListener('pointermove', eventPointerMove)
+            ref.current.addEventListener('pointerup', eventPointerUp)
+        }
         return() => {
             removeEventListener('resize', resize)
-            removeEventListener('keydown', eventKey)
+            removeEventListener('keydown', eventKeyDown)
+            removeEventListener('keyup', eventKeyUp)
+            if (ref.current) {
+                ref.current.removeEventListener('pointerdown', eventPointerDown)
+                ref.current.removeEventListener('pointermove', eventPointerMove)
+                ref.current.removeEventListener('pointerup', eventPointerUp)
+            }
         }
     
-    }, [offset]);
+    }, [offset, clicked, moving,cursor]);
 
     return(
         <div ref={ref}>
