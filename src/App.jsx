@@ -3,6 +3,7 @@ import Signal from './Signal.jsx'
 import DamageState from './DamageState.jsx'
 import FuelState from './FuelState.jsx'
 import InfoBox from './InfoBox.jsx'
+import Map from './Map.jsx'
 import './App.css'
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
       </div>
       <div className='center'>
         <div className='map'>
-          <div/>
+          <Map/>
         </div>
         <div>
           <InfoBox text='Мои координаты:' x = '0' y = '0'/>

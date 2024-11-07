@@ -98,7 +98,7 @@ svg text {
   user-select: none;
 }
 .infoBox {
-  border: 3px #00DDFF solid;
+  border: 0.25vw #00DDFF solid;
   border-bottom: none;
   background-color: rgba(40, 19, 203, .25);
   width: 30%;
@@ -135,7 +135,7 @@ svg text {
   width: 80%;
   height: 100%;
   background-color: rgba(40, 19, 203, .25);
-  border: 3px #00DDFF solid;
+  border: 0.25vw #00DDFF solid;
 }
 .center > div:last-of-type {
   margin-top: auto;
@@ -150,7 +150,7 @@ svg text {
   font-weight: bold;
   color: #2FFF00;
   background-color: rgba(47, 255, 0, .25);
-  border: 3px #2FFF00 solid;
+  border: 0.25vw #2FFF00 solid;
   border-bottom: none;
   border-radius: 25% / 50%;
 }
