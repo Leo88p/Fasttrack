@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from 'react';
 import Ship from './assets/Ship.svg?react'
 import Destination from './assets/Destination.svg?react'
+import { clientToSvg } from './Transform';
 
 function Map() {
     const ref = useRef(null)
@@ -17,10 +18,16 @@ function Map() {
         x: 0,
         y: 0
     })
-    const [dest, setDest] = useState({
-        x: 100,
-        y: 100
+    const [clientDest, setClientDest] = useState({
+        x: 10,
+        y: 10
     })
+
+    const [svgDest, setSvgDest] = useState({
+        x: 0,
+        y: 0
+    })
+
 
     function resize () {
         if(ref.current) {
@@ -128,11 +135,15 @@ function Map() {
     
     }, [offset, clicked, moving,cursor]);
 
+    useEffect(() => {
+        setSvgDest(clientToSvg(clientDest))
+    }, [clientDest])
+
     return(
         <div ref={ref}>
             <svg width={width} height={height} viewBox={`${-width/2+offset.width} ${-height/2+offset.height} ${width} ${height}`} fill="#2FFF00">
-                <Ship x='-11' y ='-11'/>
-                <Destination x='99' y ='-121'/>
+                <Ship x='-11' y ='11'/>
+                <Destination x={svgDest.x} y ={svgDest.y}/>
             </svg>
         </div>
     )
