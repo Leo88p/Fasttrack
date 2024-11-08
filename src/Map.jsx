@@ -3,7 +3,7 @@ import Ship from './assets/Ship.svg?react'
 import Destination from './assets/Destination.svg?react'
 import { clientToSvg, svgToClient } from './Transform';
 
-function Map() {
+function Map({clientDest, setClientDest}) {
     const ref = useRef(null)
 
     const [width, setWidth] = useState(100)
@@ -17,10 +17,6 @@ function Map() {
     const [cursor, setCursor] = useState({
         x: 0,
         y: 0
-    })
-    const [clientDest, setClientDest] = useState({
-        x: 10,
-        y: 10
     })
 
     const [svgDest, setSvgDest] = useState({
@@ -108,8 +104,7 @@ function Map() {
         if (!moving) {
             const dX = event.clientX - ref.current.offsetLeft - ref.current.clientWidth/2 + offset.width
             const dY = event.clientY - ref.current.offsetTop - ref.current.clientHeight/2 + offset.height
-            console.log(svgToClient({x:dX, y:dY}))
-            setSvgDest(clientToSvg(svgToClient({x:dX, y:dY})))
+            setClientDest(svgToClient({x:dX, y:dY}))
         }
         setClicked(false)
         setMoving(false)
@@ -140,7 +135,7 @@ function Map() {
             }
         }
     
-    }, [offset, clicked, moving, cursor, svgDest]);
+    }, [offset, clicked, moving, cursor]);
 
     useEffect(() => {
         setSvgDest(clientToSvg(clientDest))

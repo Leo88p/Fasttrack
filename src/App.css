@@ -118,6 +118,11 @@ svg text {
 .infoBox p:first-child {
   margin-block-start: 1.5vh;
 }
+
+.infoBox:hover {
+  border-width: 0.5vw;
+  background-color: rgba(40, 19, 203, .5);
+}
 .center {
   flex-grow: 1;
   display: flex;
@@ -159,6 +164,11 @@ svg text {
   border: 0.25vw #2FFF00 solid;
   border-bottom: none;
   border-radius: 25% / 50%;
+}
+
+.center button:hover {
+  background-color: rgba(47, 255, 0, .5);
+  border-width: 0.5vw;
 }
 
 .selectedMap {

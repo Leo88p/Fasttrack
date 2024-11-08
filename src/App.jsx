@@ -7,12 +7,11 @@ import Map from './Map.jsx'
 import './App.css'
 
 function App() {
-  const [x, setX] = useState(200);
-  const [y, setY] = useState(400);
-  useEffect(()=> {
-    
-  }, []
-  )
+  const [dest, setDest] = useState({
+    x: 5,
+    y: 5
+  })
+
   function serverRequest() {
     fetch('https://caranferen.ru/api/space/locate?'+ new URLSearchParams({
       x: x,
@@ -29,6 +28,8 @@ function App() {
     .then(data => console.log(data))
     .catch((Error)=>console.log(Error))
   }
+  
+
   return (
     <>
       <div className='rightPanel'>
@@ -43,12 +44,12 @@ function App() {
       </div>
       <div className='center'>
         <div className='map'>
-          <Map/>
+          <Map clientDest={dest} setClientDest={data=>{setDest(data)}}/>
         </div>
         <div>
           <InfoBox text='Мои координаты:' x = '0' y = '0'/>
           <button>Лететь!</button>
-          <InfoBox text='Пункт назначения:' x='10' y = '10'/>
+          <InfoBox text='Пункт назначения:' x={dest.x} y={dest.y}/>
         </div>
       </div>
       <div className='leftPanel'>
@@ -58,18 +59,6 @@ function App() {
       </div>
     </>
   )
-  /*
-      <div>
-        <div className='coordinateInput'>
-          <p>x:</p>
-          <input value={x} onChange={e=>setX(e.target.value)}/>
-        </div>
-        <div className='coordinateInput'>
-            <p>y:</p>
-            <input value={y} onChange={e=>setY(e.target.value)}/>
-        </div>
-    </div>
-  */
 }
 
 export default App

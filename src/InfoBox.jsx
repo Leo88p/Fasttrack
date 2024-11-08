@@ -3,7 +3,7 @@ function InfoBox({text, x, y}) {
         <div className = "infoBox">
             <p>{text}</p>
             <p>X: {x}</p>
-            <p>Y: {x}</p>
+            <p>Y: {y}</p>
         </div>
     )
 }
