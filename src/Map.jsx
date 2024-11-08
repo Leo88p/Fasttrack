@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from 'react';
 import Ship from './assets/Ship.svg?react'
 import Destination from './assets/Destination.svg?react'
-import { clientToSvg } from './Transform';
+import { clientToSvg, svgToClient } from './Transform';
 
 function Map() {
     const ref = useRef(null)
@@ -105,9 +105,16 @@ function Map() {
     function eventPointerUp(event) {
         ref.current.classList.remove('selectedMap')
         ref.current.classList.remove('draggingMap')
+        if (!moving) {
+            const dX = event.clientX - ref.current.offsetLeft - ref.current.clientWidth/2 + offset.width
+            const dY = event.clientY - ref.current.offsetTop - ref.current.clientHeight/2 + offset.height
+            console.log(svgToClient({x:dX, y:dY}))
+            setSvgDest(clientToSvg(svgToClient({x:dX, y:dY})))
+        }
         setClicked(false)
         setMoving(false)
     }
+
 
     useEffect(() => {
         resize()
@@ -133,7 +140,7 @@ function Map() {
             }
         }
     
-    }, [offset, clicked, moving,cursor]);
+    }, [offset, clicked, moving, cursor, svgDest]);
 
     useEffect(() => {
         setSvgDest(clientToSvg(clientDest))
