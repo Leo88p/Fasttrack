@@ -1,4 +1,6 @@
 import {useEffect, useRef, useState} from 'react';
+import Ship from './assets/Ship.svg?react'
+import Destination from './assets/Destination.svg?react'
 
 function Map() {
     const ref = useRef(null)
@@ -14,6 +16,10 @@ function Map() {
     const [cursor, setCursor] = useState({
         x: 0,
         y: 0
+    })
+    const [dest, setDest] = useState({
+        x: 100,
+        y: 100
     })
 
     function resize () {
@@ -125,7 +131,8 @@ function Map() {
     return(
         <div ref={ref}>
             <svg width={width} height={height} viewBox={`${-width/2+offset.width} ${-height/2+offset.height} ${width} ${height}`} fill="#2FFF00">
-                <polygon points='-22,20 22,20 0,-20'/>
+                <Ship x='-11' y ='-11'/>
+                <Destination x='99' y ='-121'/>
             </svg>
         </div>
     )

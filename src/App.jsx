@@ -48,7 +48,7 @@ function App() {
         <div>
           <InfoBox text='Мои координаты:' x = '0' y = '0'/>
           <button>Лететь!</button>
-          <InfoBox text='Пункт назначения:' x='100' y = '100'/>
+          <InfoBox text='Пункт назначения:' x='10' y = '10'/>
         </div>
       </div>
       <div className='leftPanel'>
