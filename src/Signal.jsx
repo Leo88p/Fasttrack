@@ -1,7 +1,11 @@
 import Wifi from './assets/Wi-fi.svg?react'
-function Signal() {
+import NoSignal from './assets/No-signal.svg?react'
+function Signal({connection}) {
     return (
-        <Wifi/>
+        <>
+            {connection&&<Wifi/>}
+            {!connection&&<NoSignal/>}
+        </>
     )
 }
 export default Signal

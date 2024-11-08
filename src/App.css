@@ -4,6 +4,8 @@
   background-image: url("./assets/background.png");
   height: 100vh;
   display: flex;
+  --signal-color: #2FFF00;
+  --signal-border-color:  rgba(47, 255, 0, .25);
 }
 
 .logo {
@@ -47,7 +49,7 @@
   flex-direction: column;
 }
 
-.rightPanel div:last-of-type {
+.rightPanel > div:last-of-type {
   flex-grow: 1;
   justify-content: center;
   display: flex;
@@ -104,7 +106,7 @@ svg text {
   width: 30%;
   box-sizing: border-box;
   color: #00DDFF;
-  font-size: 3.25vh;
+  font-size: calc(1vh + 1vw);
   font-weight: bold;
   display: flex;
   flex-direction: column;
@@ -157,7 +159,7 @@ svg text {
 
 .center button {
   width: 30%;
-  font-size: 6vh;
+  font-size: calc(2vh + 2vw);
   font-weight: bold;
   color: #2FFF00;
   background-color: rgba(47, 255, 0, .25);
@@ -169,6 +171,7 @@ svg text {
 .center button:hover {
   background-color: rgba(47, 255, 0, .5);
   border-width: 0.5vw;
+  color: #ffffff;
 }
 
 .selectedMap {
@@ -178,4 +181,22 @@ svg text {
 
 .draggingMap {
   cursor: grab !important;
+}
+
+.signal-circle:hover circle:first-child{
+  fill: var(--signal-color);
+  fill-opacity: 0.5;
+}
+
+.label {
+  display: none;
+}
+.signal-circle:hover + .label {
+  display: block;
+  background-color: var(--signal-border-color);
+  font-weight: bolder;
+  color: #ffffff;
+  font-size: calc(0.75vh + 0.75vw);
+  border: 0.35vw var(--signal-color) solid;
+  border-left: none;
 }

@@ -4,6 +4,7 @@ import DamageState from './DamageState.jsx'
 import FuelState from './FuelState.jsx'
 import InfoBox from './InfoBox.jsx'
 import Map from './Map.jsx'
+import serverRequest from './Request.js'
 import './App.css'
 
 function App() {
@@ -11,30 +12,30 @@ function App() {
     x: 5,
     y: 5
   })
+  const [ship, setShip] = useState({
+    x: 5,
+    y: 5
+  })
+  const [connection, setConnection] = useState(true)
 
-  function serverRequest() {
-    fetch('https://caranferen.ru/api/space/locate?'+ new URLSearchParams({
-      x: x,
-      y: y,
-    }).toString())
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      }
-      else {
-        throw new Error("Response was unsuccesful")
-      }
-    })
-    .then(data => console.log(data))
-    .catch((Error)=>console.log(Error))
+  function toggleConnection(data) {
+    if (!data) {
+      document.getElementById('root').style.setProperty('--signal-color', '#FF2F00')
+      document.getElementById('root').style.setProperty('--signal-border-color', 'rgba(255, 47, 0, .25)')
+    }
+    else {
+      document.getElementById('root').style.setProperty('--signal-color', '#2FFF00')
+      document.getElementById('root').style.setProperty('--signal-border-color', 'rgba(47, 255, 0, .25)')
+    }
+    setConnection(data)
   }
-  
 
   return (
     <>
       <div className='rightPanel'>
         <div className='signal'>
-            <Signal/>
+            <Signal connection={connection}/>
+            <div className='label'>{connection?'Статус связи: стабильный':'Статус связи: нестабильный'}</div>
           </div>
           <div>
             <div className='damageState'>
@@ -44,11 +45,11 @@ function App() {
       </div>
       <div className='center'>
         <div className='map'>
-          <Map clientDest={dest} setClientDest={data=>{setDest(data)}}/>
+          <Map clientDest={dest} setClientDest={data=>setDest(data)} ship={ship}/>
         </div>
         <div>
-          <InfoBox text='Мои координаты:' x = '0' y = '0'/>
-          <button>Лететь!</button>
+          <InfoBox text='Мои координаты:' x = {ship.x} y = {ship.y}/>
+          <button onClick={()=>serverRequest(dest, data=>setShip(data), data=>toggleConnection(data))}>Лететь!</button>
           <InfoBox text='Пункт назначения:' x={dest.x} y={dest.y}/>
         </div>
       </div>
