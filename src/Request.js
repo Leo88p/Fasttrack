@@ -1,4 +1,5 @@
-export default function serverRequest(dest, setShip, setConnection, setObjects) {
+import {distToFuel} from '../src/Transform.js'
+export default function serverRequest(dest, ship, setShip, setConnection, setObjects, setFuelStore) {
     fetch('https://caranferen.ru/api/space/locate?'+ new URLSearchParams({
       x: dest.x,
       y: dest.y,
@@ -12,8 +13,8 @@ export default function serverRequest(dest, setShip, setConnection, setObjects) 
       }
     })
     .then(data => {
-      console.log(data)
         if(data.status == 'success') {
+            setFuelStore(distToFuel({x:ship.x-dest.x, y:ship.y-dest.y}))
             setShip(dest)
             setConnection(true)
             setObjects(data.items)

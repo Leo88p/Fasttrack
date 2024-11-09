@@ -11,3 +11,7 @@ export function svgToClient(svg) {
         y:Math.ceil(-(svg.y-11)/22)
     })
 }
+
+export function distToFuel(dist) {
+    return Math.round(Math.sqrt(dist.x**2+dist.y**2))
+}

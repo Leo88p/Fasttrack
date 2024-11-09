@@ -18,6 +18,8 @@ function App() {
   })
   const [connection, setConnection] = useState(true)
   const [objects, setObjects] = useState([])
+  const [fuelStore, setFuelStrore] = useState(500)
+  const [fuelPerc, setFuelPerc] = useState(100)
 
   function toggleConnection(data) {
     if (!data) {
@@ -29,6 +31,12 @@ function App() {
       document.getElementById('root').style.setProperty('--signal-border-color', 'rgba(47, 255, 0, .25)')
     }
     setConnection(data)
+  }
+
+  function handleFuel(data) {
+    setFuelStrore(fuelStore-data)
+    setFuelPerc(Math.round(fuelPerc-data/5))
+    document.getElementById('root').style.setProperty('--fuel-level', 384-384/500*fuelStore)
   }
 
   return (
@@ -51,7 +59,8 @@ function App() {
         <div>
           <InfoBox text='Мои координаты:' x = {ship.x} y = {ship.y}/>
           <button disabled={dest.x==ship.x&&dest.y==ship.y} 
-           onClick={()=>serverRequest(dest, data=>setShip(data), data=>toggleConnection(data), data=>setObjects(data))}>
+           onClick={()=>serverRequest(dest, ship, data=>setShip(data), data=>toggleConnection(data), data=>setObjects(data),
+           data=>handleFuel(data))}>
               Лететь!
           </button>
           <InfoBox text='Пункт назначения:' x={dest.x} y={dest.y}/>
@@ -59,7 +68,7 @@ function App() {
       </div>
       <div className='leftPanel'>
         <div className='fuelState'>
-          <FuelState/>
+          <FuelState fuelPerc={fuelPerc}/>
           <div className='label'>Запас топлива</div>
         </div>
       </div>

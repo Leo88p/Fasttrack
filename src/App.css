@@ -8,6 +8,7 @@
   --signal-border-color:  rgba(47, 255, 0, .25);
   --fuel-color: #2FFF00;
   --fuel-border-color: rgba(47, 255, 0, .25);
+  --fuel-level: 0;
 }
 
 .logo {
@@ -204,6 +205,10 @@ svg text {
   font-size: calc(0.75vh + 0.75vw);
   border: 0.35vw var(--signal-color) solid;
   border-left: none;
+}
+.fuel rect:first-child{
+  y: var(--fuel-level);
+  transition: y 1s;
 }
 .fuel:hover rect:first-child {
   fill: var(--fuel-color);
