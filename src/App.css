@@ -9,8 +9,12 @@
   --fuel-color: rgba(47, 255, 0, 1);
   --fuel-fill-color: rgba(47, 255, 0, .25);
   --fuel-level: 0;
+  --damage-color: rgba(47, 255, 0, 1);
+  --damage-fill-color: rgba(47, 255, 0, .25);
   transition: --fuel-color 1s;
   transition: --fuel-fill-color 1s;
+  transition: --damage-color 1s;
+  transition: --damage-fill-color 1s;
 }
 
 .logo {
@@ -219,7 +223,7 @@ svg text {
 .fuel g rect:first-child {
   stroke: none;
 }
-.fuel:hover .round {
+.fuel:hover g rect {
   stroke-width: 9;
 }
 .fuel line {
@@ -251,4 +255,36 @@ svg text {
   border: 0.35vw solid;
   border-right: none;
   border-color: var(--fuel-color)
+}
+
+.damage-bar circle:hover {
+  stroke-width: 6;
+}
+.damage-bar:hover + .label {
+  display: block;
+  background-color: var(--damage-fill-color);
+  font-weight: bolder;
+  color: #ffffff;
+  font-size: calc(0.75vh + 0.75vw);
+  border: 0.35vw solid;
+  border-color: var(--damage-color);
+  border-left: none;
+}
+.damage-bar path:first-of-type {
+  fill: var(--damage-color)
+}
+.damage-bar path:not(:first-of-type) {
+  stroke: var(--damage-color)
+}
+.damage-bar circle{
+  stroke: var(--damage-color)
+}
+.damage-bar:hover path:first-of-type {
+  fill-opacity: 0.5;
+}
+.map-label{
+  display: none;
+}
+svg:hover + .map-label {
+  display: block;
 }

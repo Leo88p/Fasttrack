@@ -15,3 +15,10 @@ export function svgToClient(svg) {
 export function distToFuel(dist) {
     return Math.round(Math.sqrt(dist.x**2+dist.y**2))
 }
+
+export function healthToAngle(health) {
+    return ({
+        x: 189*Math.round(Math.sin(health*Math.PI/180)*10000)/10000,
+        y: 192+189*Math.round(Math.cos(health*Math.PI/180)*100000)/100000
+    })
+}

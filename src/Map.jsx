@@ -159,13 +159,28 @@ function Map({clientDest, setClientDest, ship, objects}) {
         setObjectList(objects.map(obj => {
             const coord = clientToSvg({x: obj.x, y: obj.y})
             if (obj.type=='spaceship') {
-                return <Ally key={obj.name} x={coord.x} y={coord.y}/>
+                return <>
+                <Ally key={'Spaceship '+obj.name+' (x: '+coord.x+', y: '+coord.y + ')'} x={coord.x} y={coord.y}/>
+                 <text className='map-label' x={coord.x+22} y ={coord.y+44} fontFamily="Arial, Helvetica, sans-serif" fill="#00DDFF" fontWeight="bold" fontSize="14">
+                 {'Spaceship '+obj.name+' (x: '+coord.x+', y: '+coord.y + ')'}
+                 </text>
+                </>  
             }
             else if (obj.type=='asteroid') {
-                return <Asteroid key={obj.name+' '+coord.x+' '+coord.y} x={coord.x} y={coord.y}/>
+                return <>
+                <Asteroid key={obj.name+' (x: '+coord.x+', y: '+coord.y + ')'} x={coord.x} y={coord.y}/>
+                <text className='map-label' x={coord.x+22} y ={coord.y+44} fontFamily="Arial, Helvetica, sans-serif" fill="#00DDFF" fontWeight="bold" fontSize="14">
+                {obj.name+' (x: '+coord.x+', y: '+coord.y + ')'}
+                </text>
+                </>
             }
             else if (obj.type=='fuel_barrel') {
-                return <Barrel key={obj.name+' '+coord.x+' '+coord.y} x={coord.x} y={coord.y}></Barrel>
+                return <>
+                <Barrel key={obj.name+' (x: '+coord.x+', y: '+coord.y + ')'} x={coord.x} y={coord.y}></Barrel>
+                <text className='map-label' x={coord.x+22} y ={coord.y+44} fontFamily="Arial, Helvetica, sans-serif" fill="#00DDFF" fontWeight="bold" fontSize="14">
+                {obj.name+' (x: '+coord.x+', y: '+coord.y + ')'}
+                </text>
+                </>
             }
         }))
     }, [objects])
@@ -174,6 +189,9 @@ function Map({clientDest, setClientDest, ship, objects}) {
             <svg key={objectList.id} width={width} height={height} viewBox={`${-width/2+offset.width} ${-height/2+offset.height} ${width} ${height}`}>
                 {objectList}
                 <Ship x={svgShip.x} y ={svgShip.y}/>
+                <text className='map-label' x={svgShip.x+22} y ={svgShip.y+44} fontFamily="Arial, Helvetica, sans-serif" fill="#00DDFF" fontWeight="bold" fontSize="14">
+                    You
+                </text>
                 <Destination x={svgDest.x} y ={svgDest.y}/>
             </svg>
         </div>
