@@ -1,9 +1,12 @@
 import {useEffect, useRef, useState} from 'react';
 import Ship from './assets/Ship.svg?react'
 import Destination from './assets/Destination.svg?react'
+import Ally from './assets/Ally.svg?react'
+import Asteroid from './assets/Asteroid.svg?react'
+import Barrel from './assets/Barrel.svg?react'
 import { clientToSvg, svgToClient } from './Transform';
 
-function Map({clientDest, setClientDest, ship}) {
+function Map({clientDest, setClientDest, ship, objects}) {
     const ref = useRef(null)
 
     const [width, setWidth] = useState(100)
@@ -28,6 +31,8 @@ function Map({clientDest, setClientDest, ship}) {
         x: 0,
         y: 0
     })
+
+    const[objectList, setObjectList] = useState([])
 
 
     function resize () {
@@ -150,9 +155,24 @@ function Map({clientDest, setClientDest, ship}) {
         setSvgShip(clientToSvg(ship))
     }, [ship])
 
+    useEffect(()=> {
+        setObjectList(objects.map(obj => {
+            const coord = clientToSvg({x: obj.x, y: obj.y})
+            if (obj.type=='spaceship') {
+                return <Ally key={obj.name} x={coord.x} y={coord.y}/>
+            }
+            else if (obj.type=='asteroid') {
+                return <Asteroid key={obj.name+' '+coord.x+' '+coord.y} x={coord.x} y={coord.y}/>
+            }
+            else if (obj.type=='fuel_barrel') {
+                return <Barrel key={obj.name+' '+coord.x+' '+coord.y} x={coord.x} y={coord.y}></Barrel>
+            }
+        }))
+    }, [objects])
     return(
         <div ref={ref}>
-            <svg width={width} height={height} viewBox={`${-width/2+offset.width} ${-height/2+offset.height} ${width} ${height}`} fill="#2FFF00">
+            <svg key={objectList.id} width={width} height={height} viewBox={`${-width/2+offset.width} ${-height/2+offset.height} ${width} ${height}`}>
+                {objectList}
                 <Ship x={svgShip.x} y ={svgShip.y}/>
                 <Destination x={svgDest.x} y ={svgDest.y}/>
             </svg>

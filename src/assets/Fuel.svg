@@ -1,7 +1,8 @@
 <svg version="1.1"
      baseProfile="full"
      width="288" height="384" viewBox="0 0 288 384"
-     xmlns="http://www.w3.org/2000/svg">
+     xmlns="http://www.w3.org/2000/svg"
+	 class='fuel'>
 
   <defs>
 	<mask id="inner">

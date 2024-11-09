@@ -6,6 +6,8 @@
   display: flex;
   --signal-color: #2FFF00;
   --signal-border-color:  rgba(47, 255, 0, .25);
+  --fuel-color: #2FFF00;
+  --fuel-border-color: rgba(47, 255, 0, .25);
 }
 
 .logo {
@@ -161,14 +163,17 @@ svg text {
   width: 30%;
   font-size: calc(2vh + 2vw);
   font-weight: bold;
-  color: #2FFF00;
-  background-color: rgba(47, 255, 0, .25);
   border: 0.25vw #2FFF00 solid;
   border-bottom: none;
   border-radius: 25% / 50%;
+  background-color: rgba(47, 255, 0, 0);
+  color: #2FFF00;
+}
+.center button:enabled {
+  background-color: rgba(47, 255, 0, .25);
 }
 
-.center button:hover {
+.center button:enabled:hover {
   background-color: rgba(47, 255, 0, .5);
   border-width: 0.5vw;
   color: #ffffff;
@@ -199,4 +204,23 @@ svg text {
   font-size: calc(0.75vh + 0.75vw);
   border: 0.35vw var(--signal-color) solid;
   border-left: none;
+}
+.fuel:hover rect:first-child {
+  fill: var(--fuel-color);
+  fill-opacity: 0.5;
+}
+.fuel:hover polygon {
+  stroke-width: 6
+}
+.fuel:hover text {
+  fill: #FFFFFF;
+}
+.fuel:hover + .label {
+  display: block;
+  background-color: var(--signal-border-color);
+  font-weight: bolder;
+  color: #ffffff;
+  font-size: calc(0.75vh + 0.75vw);
+  border: 0.35vw var(--signal-color) solid;
+  border-right: none;
 }

@@ -3,5 +3,5 @@
      width="22" height="22"
      viewBox="-11 -11 22 22"
      xmlns="http://www.w3.org/2000/svg">
-        <polygon points='-11,10 11,10 0,-10' fill="#2FFF00"/>
+        <rect x='-11' y='-11' width='22' height='22' fill="#FF2F00"/>
 </svg>
