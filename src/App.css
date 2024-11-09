@@ -4,11 +4,13 @@
   background-image: url("./assets/background.png");
   height: 100vh;
   display: flex;
-  --signal-color: #2FFF00;
-  --signal-border-color:  rgba(47, 255, 0, .25);
-  --fuel-color: #2FFF00;
-  --fuel-border-color: rgba(47, 255, 0, .25);
+  --signal-color: rgba(47, 255, 0, 1);
+  --signal-fill-color:  rgba(47, 255, 0, .25);
+  --fuel-color: rgba(47, 255, 0, 1);
+  --fuel-fill-color: rgba(47, 255, 0, .25);
   --fuel-level: 0;
+  transition: --fuel-color 1s;
+  transition: --fuel-fill-color 1s;
 }
 
 .logo {
@@ -199,7 +201,7 @@ svg text {
 }
 .signal-circle:hover + .label {
   display: block;
-  background-color: var(--signal-border-color);
+  background-color: var(--signal-fill-color);
   font-weight: bolder;
   color: #ffffff;
   font-size: calc(0.75vh + 0.75vw);
@@ -210,22 +212,43 @@ svg text {
   y: var(--fuel-level);
   transition: y 1s;
 }
-.fuel:hover rect:first-child {
+.fuel g rect {
+  stroke: var(--fuel-color);
+  fill: var(--fuel-color);
+}
+.fuel g rect:first-child {
+  stroke: none;
+}
+.fuel:hover .round {
+  stroke-width: 9;
+}
+.fuel line {
+  stroke: var(--fuel-color);
+}
+.fuel:hover g rect:first-child {
   fill: var(--fuel-color);
   fill-opacity: 0.5;
+  stroke: none;
 }
-.fuel:hover polygon {
-  stroke-width: 6
+.fuel g polygon{
+  stroke: var(--fuel-color);
+}
+.fuel:hover g polygon {
+  stroke-width: 12;
+}
+.fuel text {
+  fill: var(--fuel-color)
 }
 .fuel:hover text {
   fill: #FFFFFF;
 }
 .fuel:hover + .label {
   display: block;
-  background-color: var(--signal-border-color);
+  background-color: var(--fuel-fill-color);
   font-weight: bolder;
   color: #ffffff;
   font-size: calc(0.75vh + 0.75vw);
-  border: 0.35vw var(--signal-color) solid;
+  border: 0.35vw solid;
   border-right: none;
+  border-color: var(--fuel-color)
 }

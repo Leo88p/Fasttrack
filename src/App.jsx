@@ -18,7 +18,7 @@ function App() {
   })
   const [connection, setConnection] = useState(true)
   const [objects, setObjects] = useState([])
-  const [fuelStore, setFuelStrore] = useState(500)
+  const [fuelStore, setFuelStore] = useState(500)
   const [fuelPerc, setFuelPerc] = useState(100)
 
   function toggleConnection(data) {
@@ -34,9 +34,15 @@ function App() {
   }
 
   function handleFuel(data) {
-    setFuelStrore(fuelStore-data)
+    let diff = fuelStore-data  
+    if (diff<0)
+      diff=0
+    setFuelStore(diff)
     setFuelPerc(Math.round(fuelPerc-data/5))
-    document.getElementById('root').style.setProperty('--fuel-level', 384-384/500*fuelStore)
+    document.getElementById('root').style.setProperty('--fuel-level', 384-384/500*diff)
+    console.log(diff)
+    document.getElementById('root').style.setProperty('--fuel-color', `rgba(${47+(diff>=250?208/250*(500-diff):208)}, ${47+(diff>=250?208:208/250*diff)}, 0, 1`)
+    document.getElementById('root').style.setProperty('--fuel-fill-color', `rgba(${47+(diff>=250?208/250*(500-diff):208)}, ${47+(diff>=250?208:208/250*diff)}, 0, 0.25`)
   }
 
   return (
@@ -58,7 +64,7 @@ function App() {
         </div>
         <div>
           <InfoBox text='Мои координаты:' x = {ship.x} y = {ship.y}/>
-          <button disabled={dest.x==ship.x&&dest.y==ship.y} 
+          <button disabled={dest.x==ship.x&&dest.y==ship.y||fuelStore==0} 
            onClick={()=>serverRequest(dest, ship, data=>setShip(data), data=>toggleConnection(data), data=>setObjects(data),
            data=>handleFuel(data))}>
               Лететь!
